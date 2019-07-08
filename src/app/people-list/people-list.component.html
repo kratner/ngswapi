@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-12 col-md-3">
+    <div>
+      <input
+        #searchBox
+        id="search-box"
+        (input)="search(searchBox.value)"
+        placeholder="Search"
+      />
+    </div>
+    <ul>
+      <li
+        class="data-item"
+        *ngFor="let person of people"
+        (click)="onSelect(person)"
+      >
+        {{ person.name }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-12 col-md-9" *ngIf="selectedPerson">
+    <div class="row">
+      <div class="col-12">
+        <label>
+          <span class="data-label">
+            Name
+          </span>
+          <input
+            value="{{ selectedPerson.name }}"
+            placeholder="Name"
+          />
+        </label>
+      </div>
+      <div class="col-12">
+        <label>
+          <span class="data-label">
+            Year of Birth
+          </span>
+          <input
+            value="{{ selectedPerson.birth_year }}"
+            placeholder="Birth Year"
+          />
+        </label>
+      </div>
+      <div class="col-12">
+        <label>
+          <span class="data-label">
+            Gender
+          </span>
+          <input
+            value="{{ selectedPerson.gender }}"
+            placeholder="Gender"
+          />
+        </label>
+      </div>
+      <div class="col-12">
+        <label>
+          <span class="data-label">
+            Height
+          </span>
+          <input
+            value="{{ selectedPerson.height }}"
+            placeholder="Height"
+          />
+        </label>
+      </div>
+      <div class="col-12">
+        <label>
+          <span class="data-label">
+            Mass
+          </span>
+          <input
+            value="{{ selectedPerson.mass }}"
+            placeholder="Mass"
+          />
+        </label>
+      </div>
+      <div class="col-12">
+        <a href="{{ selectedPerson.homeworld }}">
+          {{ selectedPerson.homeworld }}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
