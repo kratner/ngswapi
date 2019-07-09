@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { of } from 'rxjs/observable/of';
+import 'rxjs/operator/do';
 import { DataService } from '../data.service';
 
 import { catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -59,7 +60,6 @@ export class PersonSearchComponent implements OnInit {
       return of([]);
     }
     return this.http.get<IPlanet[]>(`${href}`).map(data => {
-      debugger;
       return data['results'];
     });
   }
