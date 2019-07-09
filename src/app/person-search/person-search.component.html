@@ -76,7 +76,9 @@
         </label>
       </div>
       <div class="col-12">
-        <a href="{{ selectedPerson.homeworld }}">
+        <a 
+          attr.data-href="{{ selectedPerson.homeworld }}"  
+          (click)="onPlanetSelect( selectedPerson.homeworld )">
           Home Planet
         </a>
       </div>

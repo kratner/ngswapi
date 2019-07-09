@@ -13,6 +13,7 @@ import { IPerson } from './interfaces';
 
 export class DataService {
   PeopleURL = 'https://swapi.co/api/people/';
+  PlanetsURL = 'https://swapi.co/api/planets/';
   private searchTerms = new Subject<string>();
   constructor(private http: HttpClient) {}
   

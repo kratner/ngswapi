@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IPerson } from '../interfaces';
+import { IPerson, IPlanet } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -14,12 +14,17 @@ import { catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/
 })
 export class PersonSearchComponent implements OnInit {
   @Input() people: IPerson[];
+  @Input() planets: IPlanet[];
   private searchTerms = new Subject<string>();
   people$: Observable<IPerson[]>;
+  planets$: Observable<IPlanet[]>;
 
   selectedPerson: IPerson;
   onSelect(person: IPerson): void {
     this.selectedPerson = person;
+  }
+  onPlanetSelect(planetHref: string): void {
+    this.searchPlanets(planetHref);
   }
   search(term: string): void {
     this.searchTerms.next(term);
@@ -44,16 +49,21 @@ export class PersonSearchComponent implements OnInit {
     if (!term.trim()) {
       return of([]);
     }
-    /*
-    return this.http.get<IPerson[]>(`${this.dataService.PeopleURL}?name=${term}`).pipe(
-      catchError(this.handleError<IPerson[]>('searchPeople', []))
-    );
-    */
     return this.http.get<IPerson[]>(`${this.dataService.PeopleURL}?search=${term}`).map(data => {
       return data['results'];
     });
   }
   
+  searchPlanets(href: string): Observable<IPlanet[]> {
+    if (!href.trim()) {
+      return of([]);
+    }
+    return this.http.get<IPlanet[]>(`${href}`).map(data => {
+      debugger;
+      return data['results'];
+    });
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
