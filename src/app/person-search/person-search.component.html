@@ -4,7 +4,7 @@
       <input
         #searchBox
         id="search-box"
-        (input)="dataService.search(searchBox.value)"
+        (input)="search(searchBox.value)"
         placeholder="Search"
       />
     </div>
@@ -77,7 +77,7 @@
       </div>
       <div class="col-12">
         <a href="{{ selectedPerson.homeworld }}">
-          {{ selectedPerson.homeworld }}
+          Home Planet
         </a>
       </div>
     </div>

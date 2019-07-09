@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DataService } from './data.service';
 import { peopleListComponent } from './people-list/people-list.component';
+import { PersonSearchComponent } from './person-search/person-search.component';
 
 @NgModule({
-  declarations: [AppComponent, peopleListComponent],
+  declarations: [AppComponent, peopleListComponent, PersonSearchComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

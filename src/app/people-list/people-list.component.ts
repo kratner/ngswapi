@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IPerson } from '../interfaces';
-
+import { DataService } from '../data.service';
 @Component({
-  selector: 'cm-people-list',
+  selector: 'ngswapi-people-list',
   templateUrl: './people-list.component.html',
   styleUrls: ['./people-list.component.css']
 })
@@ -13,7 +13,7 @@ export class peopleListComponent implements OnInit {
   onSelect(person: IPerson): void {
     this.selectedPerson = person;
   }
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {}
 }
