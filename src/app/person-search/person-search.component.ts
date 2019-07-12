@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import {
   Routes,
+  ActivatedRoute,
   RouterModule,
-  Router
+  Router,
+  Params
 } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { IPerson, IPlanet } from '../interfaces';
@@ -78,10 +80,21 @@ export class PersonSearchComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    const id = this.activatedRoute.snapshot.paramMap.get(
+      'id'
+    );
+    if (id === '0' || id === null) {
+      debugger;
+      // return all results
+    } else {
+      debugger;
+      this.search(id);
+    }
     this.people$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),

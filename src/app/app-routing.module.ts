@@ -5,6 +5,7 @@ import { PlanetDetailComponent } from './planet-detail/planet-detail.component';
 const routes: Routes = [
   { path: '', component: PersonSearchComponent },
   { path: 'people', component: PersonSearchComponent },
+  { path: 'people/:id', component: PersonSearchComponent },
   { path: 'planets/:id', component: PlanetDetailComponent }
 ];
 
