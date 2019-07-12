@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { of } from 'rxjs/observable/of';
 import {
   catchError,
   debounceTime,
@@ -35,6 +36,16 @@ export class DataService {
       .get<IPlanet[]>(this.planetHref)
       .map(data => {
         return data;
+      });
+  }
+  getPeopleById(id: string): Observable<IPerson[]> {
+    if (!id.trim()) {
+      return of([]);
+    }
+    return this.http
+      .get<IPerson[]>(this.PeopleURL + id)
+      .map(data => {
+        return data['results'];
       });
   }
 }

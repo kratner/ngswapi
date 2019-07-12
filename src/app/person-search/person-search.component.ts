@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { of } from 'rxjs/observable/of';
 import { DataService } from '../data.service';
+import { AppComponent } from '../app.component';
 
 import {
   catchError,
@@ -20,6 +21,7 @@ import {
   distinctUntilChanged,
   switchMap
 } from 'rxjs/operators';
+import { debug } from 'util';
 @Component({
   selector: 'ngswapi-person-search',
   templateUrl: './person-search.component.html',
@@ -28,6 +30,7 @@ import {
 export class PersonSearchComponent implements OnInit {
   //@Input() people: IPerson[];
   private searchTerms = new Subject<string>();
+  private searchId = new Subject<string>();
   people$: Observable<IPerson[]>;
   //planets$: Observable<IPlanet[]>;
 
@@ -46,36 +49,12 @@ export class PersonSearchComponent implements OnInit {
         this.router.navigate(['../', 'planets', planetID]);
       })
       .subscribe();
-    /*
-    this.dataService.planet = this.dataService
-      .getPlanet(href)
-      .subscribe(
-        function(response) {
-          console.log('Success Response' + response);
-        },
-        function(error) {
-          console.log('Error happened' + error);
-        },
-        function() {
-          this.router.navigate([
-            '../',
-            'planets',
-            planetID
-          ]);
-        }
-      );
-    */
-    //this.router.navigate(['../', 'planets', planetID]);
-
-    /*
-    this.router.navigate([crisis.id], {
-      relativeTo: this.route
-    });
-    */
-    //this.searchPlanets(planetHref);
   }
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+  searchById(id: string): void {
+    this.searchId.next(id);
   }
   constructor(
     private http: HttpClient,
@@ -88,12 +67,12 @@ export class PersonSearchComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get(
       'id'
     );
+    this.people$ = this.dataService.getPeople();
     if (id === '0' || id === null) {
-      debugger;
+      
       // return all results
     } else {
-      debugger;
-      this.search(id);
+      this.people$ =  this.dataService.getPeopleById(id);
     }
     this.people$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
@@ -119,6 +98,8 @@ export class PersonSearchComponent implements OnInit {
         return data['results'];
       });
   }
+
+
 
   searchPlanets(href: string): Observable<IPlanet[]> {
     if (!href.trim()) {

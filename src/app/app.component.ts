@@ -9,7 +9,7 @@ import { DataService } from './data.service';
 })
 export class AppComponent implements OnInit {
   title = 'Star Wars People and Planets';
-  people: any[];
+  public people: any[];
 
   constructor(private dataService: DataService) {}
 
