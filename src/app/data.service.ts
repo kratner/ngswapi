@@ -45,6 +45,7 @@ export class DataService {
     return this.http
       .get<IPerson[]>(this.PeopleURL + id)
       .map(data => {
+        debugger;
         return data['results'];
       });
   }

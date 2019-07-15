@@ -67,12 +67,12 @@ export class PersonSearchComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get(
       'id'
     );
-    this.people$ = this.dataService.getPeople();
     if (id === '0' || id === null) {
       
       // return all results
+      this.people$ = this.dataService.getPeople();
     } else {
-      this.people$ =  this.dataService.getPeopleById(id);
+      this.people$ = this.dataService.getPeopleById(id);
     }
     this.people$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
